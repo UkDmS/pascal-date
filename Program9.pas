@@ -1,4 +1,4 @@
-type year=1500..2000; month=1..12; day=1..31;
+﻿type year=1500..2000; month=1..12; day=1..31;
 data=Record
   y: year; m: month; d: day; 
   End;
@@ -21,11 +21,10 @@ function Dmonth(mm: month; yy: year): day;
         1,3,5,7,8,10,12:
             Dmonth:=31;
         2:
-            if ((yy mod 4 = 0) and (yy mod 100 <> 0)) or
-            ((yy mod 4 = 0) and (yy mod 100 = 0) and (yy mod  400 = 0)) then
-                       begin    Dmonth:=29;  end
+            if Leap(yy)=true then
+                Dmonth:=29; 
             else
-                     begin      Dmonth:=28;  end
+                     Dmonth:=28;  
     end;
   end; 
   
@@ -47,8 +46,8 @@ begin
     end 
   else 
         begin       
-        dd:=dd+1;
-        mm:=mm;
+        dd:=1;
+        mm:=mm+1;
         yy:=yy;
   end;
   writeln(dd,' ',mm,' ',yy);
